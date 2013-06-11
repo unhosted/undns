@@ -1,0 +1,23 @@
+.templates {
+    display : none;
+}
+
+.name{
+   border : yellow 1px solid;
+}
+
+.selected {
+    border : red 2px groove;
+}
+
+.records_div {
+    display : none;
+}
+
+.active {
+    display : block;
+}
+
+#rules_crud {
+    background-color : grey;
+}

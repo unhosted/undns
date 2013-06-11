@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html> 
+  <head>
+    
+    <script src="lib/remotestorage.min.js"></script>
+    <script src="dns-zones_module.js"></script>
+    <script src="helpers.js"></script>
+    <script src="main.js"></script>
+    
+    <link rel="stylesheet" href="undns.css">
+  </head>
+  <body>
+    
+    <div id="undns">
+      Edit your Zone files and update your domain on un.ht.
+      <div id="zones_crud">
+	<div class="templates">
+	  <li id="zone_li_template" class="zone_li">
+	    <span class="zone name" contenteditable="true" >Name</span>
+	    <form name="soa">
+	      <table>
+		<tr>
+		  <td> mname </td>
+		  <td> rname </td>
+		  <td> serial </td>
+		  <td> refresh </td>
+		  <td> retry </td>
+		  <td> expire </td>
+		</tr>
+		<tr>
+		  <td><input name="mname"/></td>
+		  <td><input name="rname"/></td>
+		  <td><input name="serial"/></td>
+		  <td><input name="refresh"/></td>
+		  <td><input name="retry"/></td>
+		  <td><input name="expire"/></td>
+		</tr>
+		
+	      </table>
+	      <input type="hidden" name="zone_id"/>
+	    </form>
+	  </li>
+	</div>
+	<button id="zones_create" class="new_button" onclick="create_zone();">Create</button>
+	<button id="zones_edit" onclick="edit_zone();">Edit</button>
+	<button id="zones_delete" class="remove_button" onclick="delete_zone();">Delete</button>
+      </div>
+      <div id="rules_crud">
+	<div class="templates">
+	  <li id="record_li_template" class="record_li">
+	    <table>
+	      <tr>
+		<td> name </td>
+		<td> type </td>
+		<td> class </td>
+		<td> ttl </td>
+		<td>
+		  <button class="remove_button">Del</button>
+		</td>
+	      </tr>
+	      <tr>
+		<td><input name="name"/></td>
+		<td><input name="type"/></td>
+		<td><input name="class"/></td>
+		<td><input name="ttl"/></td>
+		<td>
+		  <button onclick="new_record(current_records_div)">New</button>
+		</td>
+	      </tr>
+	    </table>
+	    
+	  </li>
+	  <div id="records_div_template" class="records_div">
+	  </div>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>
