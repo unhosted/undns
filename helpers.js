@@ -1,28 +1,51 @@
-function current_zone(){
-    return zones_div.getElementsByClassName("zone_li selected")[0];
+
+function to_array(x) {
+    return Array.prototype.slice.call(x);
 }
 
-function current_zone_id(){
-    return current_zone().getElementsByTagName("form")[0].zone_id.value;
-    //error handling neccesary here??
+
+
+//might not work well
+function inspect_object(obj){
+    var ret = "{"
+    var keys = obj.keys
+    if(keys){
+	keys.forEach(function(key){
+	    ret + ' "' + key + '" : "' + obj[key] +'",'
+	});
+	ret.substr(0,ret.length-1);
+    }
+    ret+="}"
+    return ret;
 }
 
-function hide_other_zones(){
-    var zones = zones_div.getElementsByClassName("zone_li");
-    for(var i = 0; i < zones.length; i++){
-	var item = zones[i];
-	if(!item.className.match(/selected/)){
-	    item.style.display = "none"
-	}
+
+function inputs_to_object(parent){
+    var values = parent.getElementsByTagName("input");
+    var ret = new Object;
+    var len = values.length;
+    for(var i = 0; i< len; i++){
+	ret[values[i].name] = values[i].value;
+    }
+    return ret;
+}
+
+function object_to_input(parent, data){
+    var values = parent.getElementsByTagName("input");
+    var len =  values.length;
+    for(var i = 0; i < len; i++){
+	values[i].value = data[values[i].name];
+    }
+    return parent;
+    
+}
+
+function notify(text, type){
+    var t = document.getElementById("msg");
+    t.innerHTML = text;
+    if(type) {
+	t.parent.className = "messages "+type;
+    } else {
+	t.parent.className = "messages";
     }
 }
-
-function show_zones(){
-    var zones = zones_div.getElementsByClassName("zone_li");
-    for(var i = 0; i < zones.length; i++){
-	var item = zones[i];
-	item.style.display = "block"
-	
-    }
-}
-

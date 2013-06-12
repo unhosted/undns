@@ -1,4 +1,4 @@
-remoteStorage.defineModule("dns-zones", function(privateClient, publicClient){
+remoteStorage.defineModule("dns", function(privateClient, publicClient){
     privateClient.declareType("zonefile", {
 	"type" : "object",
 	"properties" : {
@@ -46,11 +46,10 @@ remoteStorage.defineModule("dns-zones", function(privateClient, publicClient){
 			},
 			"type" : {
 			    "type" : "string",
-			    "enum" : ["A","NS","CNAME","PTR"] //get complete list
+			    "enum" : ["A","NS","CNAME","PTR"] //get complete list https://en.wikipedia.org/wiki/List_of_DNS_record_types
 			},
-			"class" : {
+			"value" : {
 			    "type" : "string",
-			    "default" : "IN"
 			},		    
 			"ttl" : {
 			    "type" : "integer"
@@ -60,9 +59,24 @@ remoteStorage.defineModule("dns-zones", function(privateClient, publicClient){
 	    } 
 	}
     });
+    var path = "zonefiles/"
     return {
 	"exports" : {
-	    
+	    "store_zone" : function(data) {
+		return privateClient
+		    .storeObject("zonefile"
+				 ,path+data["name"]
+				 , data )
+	    } ,
+	    "zone" : function(name) {
+		return privateClient.getObject(path+name);
+	    },
+	    "ls_zones" : function() {
+		return privateClient.getListing(path);
+	    },
+	    "delete_zone": function(name) {
+		return privateClient.remove(path+name);
+	    }
 	}
   	
     }

@@ -5,6 +5,10 @@
     <script src="lib/remotestorage.min.js"></script>
     <script src="dns-zones_module.js"></script>
     <script src="helpers.js"></script>
+    <script src="gui.js"></script>
+    <script src="zones.js"></script>
+    <script src="records.js"></script>
+    <script src="remote.js"></script> 
     <script src="main.js"></script>
     
     <link rel="stylesheet" href="undns.css">
@@ -41,9 +45,9 @@
 	    </form>
 	  </li>
 	</div>
-	<button id="zones_create" class="new_button" onclick="create_zone();">Create</button>
-	<button id="zones_edit" onclick="edit_zone();">Edit</button>
-	<button id="zones_delete" class="remove_button" onclick="delete_zone();">Delete</button>
+	<button id="zones_create" class="new_button" onclick="gui_create_zone();">Create</button>
+	<button id="zones_edit" onclick="gui_edit_zone();">Edit</button>
+	<button id="zones_delete" class="remove_button" onclick="gui_delete_zone();">Delete</button>
       </div>
       <div id="rules_crud">
 	<div class="templates">
@@ -52,19 +56,19 @@
 	      <tr>
 		<td> name </td>
 		<td> type </td>
-		<td> class </td>
+		<td> value </td>
 		<td> ttl </td>
 		<td>
 		  <button class="remove_button">Del</button>
 		</td>
 	      </tr>
 	      <tr>
-		<td><input name="name"/></td>
-		<td><input name="type"/></td>
-		<td><input name="class"/></td>
-		<td><input name="ttl"/></td>
+		<td><input name="name" /></td>
+		<td><input name="type" /></td>
+		<td><input name="value" /></td>
+		<td><input name="ttl" /></td>
 		<td>
-		  <button onclick="new_record(current_records_div)">New</button>
+		  <button onclick="new_record(current_records_div)" >New</button>
 		</td>
 	      </tr>
 	    </table>
@@ -73,6 +77,9 @@
 	  <div id="records_div_template" class="records_div">
 	  </div>
 	</div>
+      </div>
+      <div class="messages">
+	<span id="msg"></span>
       </div>
     </div>
   </body>
